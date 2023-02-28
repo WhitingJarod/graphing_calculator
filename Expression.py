@@ -19,6 +19,9 @@ class Operand(Expression):
     def __str__(self):
         return str(self.value)
     
+    def __float__(self):
+        return float(self.value)
+    
     def __call__(self, variables = {}) -> Expression:
         for (key, value) in variables.items():
             if key == self.value:

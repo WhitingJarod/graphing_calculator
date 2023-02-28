@@ -139,8 +139,10 @@ def main():
             break
         (result, var_names) = parsePostfix(text)
         variables = {}
+        checked = []
         for name in var_names:
-            if name in variables: continue
+            if name in checked: continue
+            checked.append(name)
             value = input(f"(Optional) What is the value of {name}? ").strip()
             if value != "":
                 variables[name] = value
