@@ -3,8 +3,6 @@ from postfix import parsePostfix
 import math
 import pygame
 
-pygame.init()
-
 def map(value, from_min, from_max, to_min, to_max):
     return to_min + (to_max-to_min) * (value-from_min) / (from_max-from_min)
 
@@ -22,6 +20,7 @@ def calculateFunctionDataset(expr: Expression, min_x: float, max_x: float, width
     return data
 
 def renderFunction(expr: Expression, min_x: float, max_x: float, width: int, height: int):
+    pygame.init()
     data = calculateFunctionDataset(expr, min_x, max_x, width, height)
     surface = pygame.display.set_mode((width, height))
     surface.fill((40, 42, 54))
@@ -43,6 +42,7 @@ def renderFunction(expr: Expression, min_x: float, max_x: float, width: int, hei
                 running = False
                 break
     pygame.display.quit()
+    pygame.quit()
 
 def main():
     (expr, _) = parsePostfix("|x|+1")

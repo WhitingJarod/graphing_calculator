@@ -52,15 +52,19 @@ def parsePostfix(input: str):
                     continue
                 
                 if token == "NUMBER":
-                    if last_token == "VARIABLE" or last_token == "CLOSE_PARENTHESES":
+                    if last_token == "VARIABLE" or last_token == "CLOSE_PARENTHESES" or (last_token == Absolute and not absolute_open):
                         pushToStack(stack, postfix, Exponent)
                     postfix(Operand(mat))
                 
+                #TODO: Make this all more streamlined instead of a chain of if statements.
                 elif token == "VARIABLE":
                     if last_token == "NUMBER":
                         pushToStack(stack, postfix, Times)
+                    elif last_token == "CLOSE_PARENTHESES" or (last_token == Absolute and not absolute_open):
+                        pushToStack(stack, postfix, Exponent)
                     postfix(Operand(mat))
-                    variables.append(mat)
+                    if not mat in variables:
+                        variables.append(mat)
 
                 elif token == "OPEN_PARENTHESES":
                     if last_token == "VARIABLE"\

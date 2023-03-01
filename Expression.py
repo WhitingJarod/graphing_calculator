@@ -80,7 +80,7 @@ class Operand(Expression):
 ###############################################################################
 
 class UnaryOperator(Expression):
-    precedence = -1
+    precedence = 10
     symbol = None
     right_associative = False
 
@@ -92,7 +92,7 @@ class UnaryOperator(Expression):
 
 class Negative(UnaryOperator):
     symbol = '-'
-    precedence = 2
+    precedence = 10
 
     def __call__(self, variables = {}) -> Operand:
         return -self.rhs(variables)
